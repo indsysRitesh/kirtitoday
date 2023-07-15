@@ -15,14 +15,13 @@ import lombok.Setter;
 public class BankDetails {
 
     @Id
-            @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     int id;
     String bankName;
     String accountNumber;
     String branch;
     String ifscCode;
 
-//    @OneToOne(cascade = CascadeType.ALL,mappedBy = "ShopDetails")
-//            @JoinColumn(name ="shopId" ,referencedColumnName = "id")
-    String shopId;
+    @ManyToOne
+    private Vendor vendor;
 }
