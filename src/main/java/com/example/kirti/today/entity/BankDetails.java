@@ -1,5 +1,7 @@
 package com.example.kirti.today.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -22,6 +24,7 @@ public class BankDetails {
     String branch;
     String ifscCode;
 
-    @ManyToOne
+    @OneToOne
+    @JsonBackReference
     private Vendor vendor;
 }

@@ -1,6 +1,6 @@
 package com.example.kirti.today.entity;
 
-
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -8,15 +8,13 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 @Entity
-@AllArgsConstructor
-@NoArgsConstructor
 @Getter
 @Setter
+@NoArgsConstructor
+@AllArgsConstructor
 public class Vendor {
 
     @Id
@@ -26,16 +24,16 @@ public class Vendor {
     String vendorAddress;
     long mobileNumber;
     String vendorEmail;
+    String password;
     long adharCard;
     String photo;
 
-    @OneToMany(mappedBy = "vendor",cascade= CascadeType.ALL)
-    private List<BankDetails> banks = new ArrayList<>();
+    @OneToOne(mappedBy = "vendor",cascade= CascadeType.ALL)
+    @JsonManagedReference
+    private BankDetails bankDetails;
 
 
-    @OneToMany(mappedBy = "vendor",cascade= CascadeType.ALL)
-    private List<ShopDetails> shops = new ArrayList<>();
-//    @OneToMany(mappedBy = "vendorID" ,fetch = FetchType.LAZY,cascade = CascadeType.ALL)
-
-
+    @OneToMany(mappedBy = "vendor",cascade= CascadeType.ALL,fetch = FetchType.LAZY)
+    @JsonManagedReference
+    private List<ShopDetails> shopDetails=new ArrayList<>();
 }

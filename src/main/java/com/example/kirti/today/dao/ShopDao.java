@@ -22,6 +22,7 @@ public class ShopDao {
         shopDetails1.setMobileNumber(shopDetails.getMobileNumber());
         shopDetails1.setGstNumber(shopDetails.getGstNumber());
         shopDetails1.setPhoto(shopDetails.getPhoto());
+//        shopDetails1.setVendor(shopDetails.getVendor());
         return shopRepo.save(shopDetails1);
 
     }

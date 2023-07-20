@@ -3,12 +3,13 @@ package com.example.kirti.today.controller;
 import com.example.kirti.today.dao.ShopDao;
 import com.example.kirti.today.dao.VendorDao;
 import com.example.kirti.today.entity.ShopDetails;
-import com.example.kirti.today.entity.Vendor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 @RestController
+@CrossOrigin(origins = "*")
+
 @RequestMapping("/shop")
 public class ShopController {
 

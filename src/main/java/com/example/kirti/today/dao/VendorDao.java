@@ -4,7 +4,6 @@ import com.example.kirti.today.entity.Vendor;
 import com.example.kirti.today.repository.VendorRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.RequestBody;
 
 import java.util.List;
 
@@ -14,6 +13,15 @@ public class VendorDao {
     @Autowired
     private VendorRepo vendorRepo;
 
+
+
+    public Vendor login(String vendorEmail, String password){
+        Vendor vendor=vendorRepo.findByVendorEmail(vendorEmail);
+        if (vendor != null && password.equals(vendor.getPassword())){
+            return vendor;
+        }
+        return null;
+    }
     public Vendor addVendor(Vendor vendor){
        return vendorRepo.save(vendor);
     }
@@ -25,6 +33,7 @@ public class VendorDao {
         vendor1.setMobileNumber(vendor.getMobileNumber());
         vendor1.setVendorEmail(vendor.getVendorEmail());
         vendor1.setAdharCard(vendor.getAdharCard());
+        vendor1.setPassword(vendor.getPassword());
         vendor1.setPhoto(vendor.getPhoto());
 
         return vendorRepo.save(vendor1);
