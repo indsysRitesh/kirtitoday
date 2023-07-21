@@ -1,11 +1,15 @@
 package com.example.kirti.today.entity;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+
+import java.util.ArrayList;
+import java.util.List;
 
 
 @Entity
@@ -27,5 +31,11 @@ public class ShopDetails {
    @ManyToOne
    @JsonBackReference
    private Vendor vendor;
+
+   @OneToMany(mappedBy = "shopDetails",cascade = CascadeType.ALL,fetch = FetchType.LAZY)
+   @JsonManagedReference
+   private List<Product> products=new ArrayList<>();
+
+
 
 }
