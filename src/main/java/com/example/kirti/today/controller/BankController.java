@@ -31,7 +31,7 @@ public class BankController {
     }
 
     @DeleteMapping("/delete/{id}")
-    public String deleteBank(Integer id){
+    public String deleteBank(@PathVariable Integer id){
         return bankDao.deleteById(id);
     }
 }

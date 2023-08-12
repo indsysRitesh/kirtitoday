@@ -8,6 +8,11 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
+import org.springframework.http.MediaType;
+
+import java.util.*;
 
 @Entity
 @Getter
@@ -22,15 +27,38 @@ public class Product {
     String name;
     String description;
     float price;
+    float discount;
     int quntityAvlaible;
-    String brand;
     String photo;
 
     @ManyToOne
-    @JsonBackReference
+//    @JoinColumn(name = "category ")
+    @JsonBackReference(value = "product-category")
     private Category category;
+//
+@OneToMany(mappedBy = "product",fetch = FetchType.LAZY,cascade = CascadeType.ALL)
+@JsonManagedReference(value = "product-orderItem")
+private List<OrderItems> orderItems=new ArrayList<>();
+
+
+
 
     @ManyToOne
-    @JsonBackReference
+//    @JoinColumn(name = "shopDetails")
+    @JsonBackReference(value = "product-shop")
     private ShopDetails shopDetails;
+
+    @ManyToOne
+    @JsonBackReference(value = "product-cart")
+    private Cart cart;
+
+    @OneToMany(mappedBy = "products",fetch = FetchType.LAZY,cascade = CascadeType.ALL)
+    @JsonManagedReference(value = "product-comments")
+    private Set<Comments> comments=new HashSet<>();
+
+    @CreationTimestamp
+    protected Date createdDate;
+
+    @UpdateTimestamp
+    protected Date updateDate;
 }

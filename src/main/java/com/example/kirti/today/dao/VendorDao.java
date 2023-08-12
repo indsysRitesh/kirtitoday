@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class VendorDao {
@@ -43,6 +44,10 @@ public class VendorDao {
 
     public List<Vendor> getAllVendors(){
         return vendorRepo.findAll();
+    }
+
+    public Optional<Vendor> getIdVendor(Integer id){
+        return vendorRepo.findById(id);
     }
 
     public String delete(Integer id){

@@ -3,12 +3,12 @@ package com.example.kirti.today.entity;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 
@@ -32,8 +32,14 @@ public class ShopDetails {
    @JsonBackReference
    private Vendor vendor;
 
+   @CreationTimestamp
+   protected Date createdDate;
+
+   @UpdateTimestamp
+   protected Date updateDate;
+
    @OneToMany(mappedBy = "shopDetails",cascade = CascadeType.ALL,fetch = FetchType.LAZY)
-   @JsonManagedReference
+   @JsonManagedReference(value = "product-shop")
    private List<Product> products=new ArrayList<>();
 
 

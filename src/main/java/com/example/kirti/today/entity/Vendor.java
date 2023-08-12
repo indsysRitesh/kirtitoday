@@ -2,12 +2,12 @@ package com.example.kirti.today.entity;
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 @Entity
@@ -36,4 +36,10 @@ public class Vendor {
     @OneToMany(mappedBy = "vendor",cascade= CascadeType.ALL,fetch = FetchType.LAZY)
     @JsonManagedReference
     private List<ShopDetails> shopDetails=new ArrayList<>();
+
+    @CreationTimestamp
+    protected Date createdDate;
+
+    @UpdateTimestamp
+    protected Date updateDate;
 }

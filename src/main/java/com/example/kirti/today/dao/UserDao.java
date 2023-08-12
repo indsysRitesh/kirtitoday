@@ -3,9 +3,11 @@ package com.example.kirti.today.dao;
 import com.example.kirti.today.entity.User;
 import com.example.kirti.today.repository.UserRepo;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 
 @Service
@@ -43,12 +45,16 @@ public class UserDao {
         return userRepo.findAll();
     }
 
+    public Optional<User> getByIdUser(Integer id){
+        return userRepo.findById(id);
+    }
+
     public User getById(String userName){
         return userRepo.findByUserName(userName);
     }
     public String deleteById(Integer id){
         userRepo.deleteById(id);
-        return "Bank details Deleted Successfully";
+        return "user details Deleted Successfully";
     }
 
 

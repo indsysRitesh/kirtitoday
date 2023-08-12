@@ -32,7 +32,7 @@ public class ShopController {
     }
 
     @DeleteMapping("/delete/{id}")
-    public String deleteVen(Integer id){
+    public String deleteVen(@PathVariable Integer id){
         return shopDao.deleteById(id);
     }
 

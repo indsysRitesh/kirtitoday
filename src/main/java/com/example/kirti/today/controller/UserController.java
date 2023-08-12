@@ -9,6 +9,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @CrossOrigin(origins = "*")
@@ -40,13 +41,18 @@ public class UserController {
         return userDao.getAllUser();
     }
 
+    @GetMapping("/get/{id}")
+    public Optional<User> getIdUser(@PathVariable Integer id){
+        return userDao.getByIdUser(id);
+    }
+
     @PutMapping("/update")
     public User updateBank(@RequestBody User user){
         return userDao.update(user);
     }
 
     @DeleteMapping("/delete/{id}")
-    public String deleteBank(Integer id){
+    public String deleteBank(@PathVariable Integer id){
         return userDao.deleteById(id);
     }
 }

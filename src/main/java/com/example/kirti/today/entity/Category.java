@@ -6,8 +6,11 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 @Entity
@@ -25,6 +28,12 @@ public class Category {
     String description;
 
     @OneToMany(mappedBy = "category",cascade = CascadeType.ALL,fetch = FetchType.LAZY)
-    @JsonManagedReference
+    @JsonManagedReference(value = "product-category")
     private List<Product> products=new ArrayList<>();
+
+    @CreationTimestamp
+    protected Date createdDate;
+
+    @UpdateTimestamp
+    protected Date updateDate;
 }

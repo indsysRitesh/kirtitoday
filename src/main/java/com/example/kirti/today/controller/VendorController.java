@@ -9,6 +9,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
+
 @RestController
 @CrossOrigin(origins = "*")
 
@@ -32,6 +34,7 @@ public class VendorController {
 
     @PostMapping("/add")
     public Vendor addVendor(@RequestBody Vendor vendor){
+
        return vendorDao.addVendor(vendor);
 
     }
@@ -40,6 +43,11 @@ public class VendorController {
         return ResponseEntity.ok(vendorDao.getAllVendors());
     }
 
+
+    @GetMapping("/get/{id}")
+    public Optional<Vendor> getVendorId(@PathVariable Integer id){
+        return vendorDao.getIdVendor(id);
+    }
     @PutMapping("/update")
     public Vendor updateVen(@RequestBody Vendor vendor){
         return vendorDao.updateVendor(vendor);
