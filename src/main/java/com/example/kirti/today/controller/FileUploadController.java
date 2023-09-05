@@ -23,7 +23,7 @@ public class FileUploadController {
     private FileUploadDao fileUploadDao;
 
     @Value("${project.image}")
-    private String path;;
+    private String path;
 
     @PostMapping("/upload")
     public ResponseEntity<FileResponse> fileUpload(@RequestParam("image") MultipartFile image){

@@ -1,10 +1,13 @@
 package com.example.kirti.today.dao;
 
 import com.example.kirti.today.entity.Product;
+import com.example.kirti.today.payload.ExcelHelper;
 import com.example.kirti.today.repository.ProductRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
 import java.util.List;
 import java.util.Optional;
 
@@ -15,8 +18,8 @@ public class ProductDao {
     @Autowired
     private ProductRepo productRepo;
 
-    public Product addProduct(Product product){
-        return productRepo.save(product);
+    public void addProduct(Product product){
+        productRepo.save(product);
     }
 
     public Product updateProduct(Product product){
@@ -27,7 +30,6 @@ public class ProductDao {
         product1.setPrice(product.getPrice());
         product1.setDiscount(product.getDiscount());
 
-        product1.setPhoto(product.getPhoto());
 
         return productRepo.save(product1);
     }
@@ -38,12 +40,27 @@ public class ProductDao {
     }
 
 
-    public Optional<Product> getById(Integer id){
-        return productRepo.findById(id);
+
+    public Product getProductById(Integer id){
+        return productRepo.findById(id).get();
     }
 
     public String deleteProduct(Integer id){
         productRepo.deleteById(id);
         return "delete product";
     }
+
+
+public void saveExcelFile(MultipartFile excelfile){
+
+    try {
+        List<Product> productList= ExcelHelper.convertExcel(excelfile.getInputStream());
+        this.productRepo.saveAll(productList);
+    } catch (IOException e) {
+        throw new RuntimeException(e);
+    }
+}
+
+
+
 }

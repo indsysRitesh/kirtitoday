@@ -21,13 +21,15 @@ public class VendorController {
     private VendorDao  vendorDao;
 
     @PostMapping("/login")
-    public ResponseEntity<String> login(@RequestBody Vendor vendor){
+    public ResponseEntity<Vendor> login(@RequestBody Vendor vendor){
         Vendor vendor1=vendorDao.login(vendor.getVendorEmail(), vendor.getPassword());
         if (vendor1 != null){
-            return ResponseEntity.status(HttpStatus.OK).body("login succeesful");
+//            return ResponseEntity.status(HttpStatus.OK).body("login succeesful");
+            Vendor vendor2=vendorDao.sendVendorDetails(vendor.getVendorEmail());
+            return new  ResponseEntity<>(vendor2,HttpStatus.OK);
         }
         else {
-            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Invalid Entry");
+            return new  ResponseEntity<>(HttpStatus.UNAUTHORIZED);
         }
 
     }

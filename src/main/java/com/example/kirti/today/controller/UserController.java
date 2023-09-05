@@ -21,13 +21,15 @@ public class UserController {
 
 
     @PostMapping("/login")
-    public ResponseEntity<String> login(@RequestBody User user){
+    public ResponseEntity<User> login(@RequestBody User user){
         User user1=userDao.login(user.getUserName(), user.getPassword());
         if (user1 != null){
-            return ResponseEntity.status(HttpStatus.OK).body("login succeesful");
+//            return ResponseEntity.status(HttpStatus.OK).body("login succeesful");
+            User user2=userDao.sendUserDetails(user.getUserName());
+            return new  ResponseEntity<>(user2,HttpStatus.OK);
         }
         else {
-            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Invalid Entry");
+            return new  ResponseEntity<>(HttpStatus.UNAUTHORIZED);
         }
 
     }

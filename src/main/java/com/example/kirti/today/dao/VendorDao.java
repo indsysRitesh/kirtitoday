@@ -23,6 +23,11 @@ public class VendorDao {
         }
         return null;
     }
+
+    public Vendor sendVendorDetails(String vendorEmail){
+        Vendor vendor=vendorRepo.findByVendorEmail(vendorEmail);
+        return vendor;
+    }
     public Vendor addVendor(Vendor vendor){
        return vendorRepo.save(vendor);
     }

@@ -28,6 +28,11 @@ public class UserDao {
         return null;
     }
 
+    public User sendUserDetails(String userName){
+        User user=userRepo.findByUserName(userName);
+        return user;
+    }
+
     public User addUser(User user){
         return userRepo.save(user);
     }

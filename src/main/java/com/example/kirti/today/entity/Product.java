@@ -24,18 +24,24 @@ public class Product {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     int id;
+
     String name;
     String description;
-    float price;
-    float discount;
+    double price;
+    double discount;
     int quntityAvlaible;
-    String photo;
+    String image;
 
     @ManyToOne
 //    @JoinColumn(name = "category ")
     @JsonBackReference(value = "product-category")
     private Category category;
-//
+
+
+
+
+
+    //
 @OneToMany(mappedBy = "product",fetch = FetchType.LAZY,cascade = CascadeType.ALL)
 @JsonManagedReference(value = "product-orderItem")
 private List<OrderItems> orderItems=new ArrayList<>();
@@ -61,4 +67,6 @@ private List<OrderItems> orderItems=new ArrayList<>();
 
     @UpdateTimestamp
     protected Date updateDate;
+
+
 }
